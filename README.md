@@ -71,3 +71,10 @@ Feeling uninspired by the portfolio? Here's a list of cool portfolios I found af
 * <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
 * <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
 * <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+
+### Performance optimization done
+* minified main.js and style.css
+* Compresssed and resized pizzaria.jpg
+* insert async to script tags (js/perfmatters.js and http://www.google-analytics.com/analytics.js)
+* Removed unnecessary comments
+* Was unable to implement caching with github pages
