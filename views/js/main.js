@@ -334,6 +334,9 @@ var ingredientItemizer = function(string) {
 
 // Returns a string with random pizza ingredients nested inside <li> tags
 var makeRandomPizza = function() {
+    // Function-level strict mode syntax
+  'use strict';
+
   var pizza = "";
 
   var numberOfMeats = Math.floor((Math.random() * 4));
@@ -360,6 +363,9 @@ var makeRandomPizza = function() {
 
 // returns a DOM element for each pizza
 var pizzaElementGenerator = function(i) {
+    // Function-level strict mode syntax
+  'use strict';
+
   var pizzaContainer,             // contains pizza title, image and list of ingredients
       pizzaImageContainer,        // contains the pizza image
       pizzaImage,                 // the pizza image itself
@@ -377,6 +383,7 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.style.height = "325px";
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
   pizzaImageContainer.classList.add("col-md-6");
+  pizzaImageContainer.classList.add("randomPizza");
 
   pizzaImage.src = "images/pizza.png";
   pizzaImage.classList.add("img-responsive");
@@ -400,11 +407,14 @@ var pizzaElementGenerator = function(i) {
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) {
+    // Function-level strict mode syntax
+  'use strict';
+
   window.performance.mark("mark_start_resize");   // User Timing API function
 
   // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
-    var pizzaSize = document.querySelector("#pizzaSize");
+    var pizzaSize = document.getElementById("pizzaSize");
     switch(size) {
       case "1":
         pizzaSize.innerHTML = "Small";
@@ -424,8 +434,11 @@ var resizePizzas = function(size) {
 
    // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
+      // Function-level strict mode syntax
+  'use strict';
+
     var oldWidth = elem.offsetWidth;
-    var windowWidth = document.getElementById("#randomPizzas").offsetWidth;
+    var windowWidth = document.getElementById("randomPizzas").offsetWidth;
     var oldSize = oldWidth / windowWidth;
 
     // Optional TODO: change to 3 sizes? no more xl?
@@ -451,16 +464,23 @@ var resizePizzas = function(size) {
 
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
-
+      // Function-level strict mode syntax
+  'use strict';
+  var newwidth;
+  var randomPizzas = document.querySelectorAll(".randomPizza");
 // Determine the new width in %
       switch(size) {
         case "1":
-          newwidth =  0.25;
+          newwidth =  25;
+          break;
         case "2":
-          newwidth =  0.3333;
+          newwidth =  33.33;
+          break;
         case "3":
-          newwidth =  0.5;
+          newwidth =  50;
+          break;
         default:
+        console.log("Bug in changePizzaSizes");
       }
 
     for (var i = 0; i < randomPizzas.length; i++) {
@@ -497,6 +517,9 @@ var frame = 0;
 
 // Logs the average amount of time per 10 frames needed to move the sliding background pizzas on scroll.
 function logAverageFrame(times) {   // times is the array of User Timing measurements from updatePositions()
+    // Function-level strict mode syntax
+  'use strict';
+
   var numberOfEntries = times.length;
   var sum = 0;
   for (var i = numberOfEntries - 1; i > numberOfEntries - 11; i--) {
@@ -510,6 +533,9 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
+    // Function-level strict mode syntax
+  'use strict';
+
   frame++;
   window.performance.mark("mark_start_frame");
 
@@ -532,6 +558,8 @@ function updatePositions() {
 
 // runs updatePositions on scroll
 window.addEventListener('scroll', updatePositions);
+  // Function-level strict mode syntax
+  'use strict';
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
@@ -554,7 +582,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    document.getElementById("movingPizzas1").appendChild(elem);
   }
   updatePositions();
 });
