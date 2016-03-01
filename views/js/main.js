@@ -467,7 +467,7 @@ var resizePizzas = function(size) {
       // Function-level strict mode syntax
   'use strict';
   var newwidth;
-  var randomPizzas = document.querySelectorAll(".randomPizza");
+  var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
 // Determine the new width in %
       switch(size) {
         case "1":
@@ -539,10 +539,19 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
+
   var x =document.body.scrollTop / 1250;
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((x) + (i % 5));
+  // array to store phase values used to position pizzas
+  var phaseArray = [];
+  // compute the five phase values
+  for (i = 0; i < 5; i++) {
+    phaseArray.push(Math.sin(x+ i % 5));
+  }
+  var itemCount = items.length;
+  // set updated position of items
+  for (var i = 0; i < itemCount; i++) {
+    var phase = phaseArray[i % 5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -574,6 +583,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var numerOfPizza = cols * rows;
     console.log(numerOfPizza);
   var s = 256;
+  var movingPizzas1 = document.getElementById("movingPizzas1");
   for (var i = 0; i < numerOfPizza; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
@@ -582,7 +592,7 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.getElementById("movingPizzas1").appendChild(elem);
+    movingPizzas1.appendChild(elem);
   }
   updatePositions();
 });

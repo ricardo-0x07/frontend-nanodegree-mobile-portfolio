@@ -78,3 +78,12 @@ Feeling uninspired by the portfolio? Here's a list of cool portfolios I found af
 * insert async to script tags (js/perfmatters.js and http://www.google-analytics.com/analytics.js)
 * Removed unnecessary comments
 * Was unable to implement caching with github pages
+*‘use strict inserted into functions
+* Implemented an approach to reduce the number of pizzas on the screen
+base on the screen size. This was based on a pizzas initially space 200px apart vertically and horizontally and screen size.
+* Improved The frame rate is below 60 fps while scrolling. by promoting
+.movers to a layer with the will-change: transform; css
+* modified code to resize random in  than 5 ms by using a switch statement to select the % width to set the pizza to and remove code that may hvae been causing forced synchronous layouts
+* used more efficient selector such as getelementsByClassName instead of querySelectorAll. 
+* Cached references to access DOM elements outside of loops (where possible) to eliminate repeated unnecessary access everytime te loop runs
+* batched style reads first then performed style writes to avoid forced synchronous layouts. also remove style reads or writes from the same loops where possible
